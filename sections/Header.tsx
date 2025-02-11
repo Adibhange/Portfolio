@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -11,13 +11,26 @@ const navLinks = [
 ];
 
 const Header = () => {
-  const pathname = usePathname();
+  // Initialize currentHash from window.location.hash if available; default to "#home"
+  const [currentHash, setCurrentHash] = useState(
+    typeof window !== "undefined" && window.location.hash
+      ? window.location.hash
+      : "#home",
+  );
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   return (
-    <div className="top-0 z-10 flex flex-col items-center justify-center pt-3">
-      <nav className="flex gap-1 rounded-xl border border-border bg-foreground/10 p-0.5 backdrop-blur">
+    <div className="fixed top-0 z-10 flex w-full flex-col items-center justify-center pt-3">
+      <nav className="flex gap-1 rounded-xl border border-border bg-foreground/10 px-0.5 py-1 backdrop-blur">
         {navLinks.map((navLink, index) => {
-          const isActive = pathname === navLink.href;
+          const isActive = currentHash === navLink.href;
           return (
             <Link
               key={index}
