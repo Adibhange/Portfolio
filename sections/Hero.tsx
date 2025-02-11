@@ -1,4 +1,4 @@
-import BackgroundCircles from "@/components/BackgroundCircle";
+import BackgroundCircles from "@/components/ui/BackgroundCircle";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 

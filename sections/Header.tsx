@@ -35,6 +35,7 @@ const Header = () => {
             <Link
               key={index}
               href={navLink.href}
+              onClick={() => setCurrentHash(navLink.href)}
               className={`rounded-xl px-4 py-1.5 text-sm font-semibold transition duration-300 ${
                 isActive
                   ? "bg-foreground text-background"
