@@ -6,6 +6,8 @@ import SectionHeader from "@/components/SectionHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, Code, GraduationCap } from "lucide-react";
 import { Skills } from "@/Data/Skills";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -102,15 +104,20 @@ const About = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="relative flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {Skills.map((skill) => (
-                    <div
+                    <Badge
                       key={skill.title}
-                      className="inline-flex items-center space-x-2 rounded-full border border-transparent bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground transition-colors hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                      variant="secondary"
+                      className="space-x-2 md:text-base lg:text-lg"
                     >
-                      {skill.icon}{" "}
-                      <span className="text-lg">{skill.title}</span>
-                    </div>
+                      <Image
+                        src={skill.icon}
+                        alt={skill.title}
+                        className="size-5 md:size-7 lg:size-8"
+                      />
+                      <span>{skill.title}</span>
+                    </Badge>
                   ))}
                 </div>
               </CardContent>
